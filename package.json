@@ -1,0 +1,31 @@
+{
+  "name": "git-switch-f-infy",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@giscus/react": "^3.0.0",
+    "@primer/octicons-react": "^19.13.0",
+    "@primer/react": "^36.27.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.6.0",
+    "rehype-pretty-code": "^0.14.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.1",
+    "styled-components": "^5.3.11"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "shiki": "^1.22.0",
+    "unified": "^11.0.5",
+    "vite": "^8.0.0"
+  }
+}

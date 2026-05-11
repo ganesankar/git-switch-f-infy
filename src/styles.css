@@ -1,0 +1,210 @@
+/* Minimal global styles. Primer's ThemeProvider/BaseStyles handles most of it. */
+
+/* Force light UA defaults across the entire document — the browser uses this
+   to colour the scrollbar, form controls, autofill backgrounds, etc. */
+:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--bgColor-default, #ffffff);
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  color: var(--fgColor-default, #1f2328);
+}
+
+/* ---------- Light scrollbars (page + inner scroll containers) ---------- */
+/* Firefox + modern Chromium */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d9e0 #f6f8fa;
+}
+
+/* WebKit / Chromium */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #f6f8fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d9e0;
+  border-radius: 6px;
+  /* The 3px transparent border slims the visible thumb without changing the
+     overall scrollbar width — same trick GitHub uses. */
+  border: 3px solid #f6f8fa;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b1bac4;
+}
+::-webkit-scrollbar-corner {
+  background: #f6f8fa;
+}
+
+/* ---------- Diff-styled markdown body (Files changed tab) ---------- */
+/* The expanded "file" body shows the rendered post wrapped in a thin green
+   left rail + tinted background, so it reads like the additions side of a
+   GitHub diff without us having to render an actual diff. */
+.gl-md.gl-diff > div {
+  background: #e6ffec;
+  border-left: 2px solid var(--bgColor-success-emphasis, #1a7f37);
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+}
+
+/* ---------- Markdown body inside comment cards ---------- */
+.gl-md {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--fgColor-default, #1f2328);
+  word-wrap: break-word;
+}
+.gl-md h1, .gl-md h2, .gl-md h3, .gl-md h4 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  border-bottom: 1px solid var(--borderColor-muted, #d1d9e0);
+  padding-bottom: 6px;
+}
+.gl-md h1 { font-size: 22px; }
+.gl-md h2 { font-size: 18px; }
+.gl-md h3 { font-size: 16px; }
+.gl-md h4 { font-size: 14px; border-bottom: 0; }
+.gl-md p, .gl-md ul, .gl-md ol, .gl-md blockquote, .gl-md table {
+  margin: 0 0 14px 0;
+}
+.gl-md ul, .gl-md ol { padding-left: 24px; }
+.gl-md a { color: var(--fgColor-accent, #0969da); text-decoration: none; }
+.gl-md a:hover { text-decoration: underline; }
+.gl-md blockquote {
+  border-left: 4px solid var(--borderColor-default, #d1d9e0);
+  color: var(--fgColor-muted, #59636e);
+  padding: 0 14px;
+}
+.gl-md hr {
+  border: 0;
+  border-top: 1px solid var(--borderColor-default, #d1d9e0);
+  margin: 18px 0;
+}
+
+/* Tables */
+.gl-md table { border-collapse: collapse; width: 100%; }
+.gl-md th, .gl-md td {
+  border: 1px solid var(--borderColor-default, #d1d9e0);
+  padding: 6px 12px;
+  text-align: left;
+}
+.gl-md th { background: var(--bgColor-muted, #f6f8fa); font-weight: 600; }
+
+/* Task list checkboxes (from remark-gfm) */
+.gl-md ul.contains-task-list { list-style: none; padding-left: 0; }
+.gl-md .task-list-item input { margin-right: 6px; }
+
+/* ---------- Plain inline code (no language) ---------- */
+.gl-md :not(pre) > code:not([data-language]) {
+  background: rgba(175, 184, 193, 0.2);
+  font-family:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 85%;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+}
+
+/* ---------- rehype-pretty-code (Shiki) — github-dark-dimmed ---------- */
+
+/* Highlighted inline code: `[1, 2, 3]{:js}` */
+.gl-md code[data-language] {
+  font-family:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 85%;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+}
+
+/* Code-block figure wrapper */
+.gl-md figure[data-rehype-pretty-code-figure] {
+  margin: 0 0 16px 0;
+  border: 1px solid var(--borderColor-muted, #d1d9e0);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Optional title bar (from ```js title="filename.js") */
+.gl-md figcaption[data-rehype-pretty-code-title] {
+  font-family:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 12px;
+  color: var(--fgColor-muted, #59636e);
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--borderColor-muted, #d1d9e0);
+  background: var(--bgColor-muted, #f6f8fa);
+}
+
+/* The pre block itself */
+.gl-md figure[data-rehype-pretty-code-figure] pre {
+  margin: 0;
+  padding: 12px 0;
+  overflow-x: auto;
+  border: 0;
+  border-radius: 0;
+  font-family:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.gl-md figure[data-rehype-pretty-code-figure] pre code {
+  display: grid;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+.gl-md figure[data-rehype-pretty-code-figure] pre [data-line] {
+  padding: 0 14px;
+  border-left: 2px solid transparent;
+}
+
+/* Highlighted line:  ```js {1-3} */
+.gl-md figure[data-rehype-pretty-code-figure] pre [data-highlighted-line] {
+  background: rgba(175, 184, 193, 0.2);
+  border-left-color: var(--fgColor-accent, #0969da);
+}
+
+/* Highlighted chars:  ```js /carrot/ */
+.gl-md figure[data-rehype-pretty-code-figure] pre [data-highlighted-chars] {
+  background: rgba(175, 184, 193, 0.2);
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+/* Line numbers:  ```js showLineNumbers */
+.gl-md figure[data-rehype-pretty-code-figure] pre code[data-line-numbers] {
+  counter-reset: line;
+}
+.gl-md figure[data-rehype-pretty-code-figure] pre code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--fgColor-muted, #59636e);
+}
+.gl-md figure[data-rehype-pretty-code-figure] pre code[data-line-numbers-max-digits="3"] > [data-line]::before {
+  width: 2.25rem;
+}
