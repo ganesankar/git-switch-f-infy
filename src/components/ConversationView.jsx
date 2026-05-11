@@ -71,6 +71,14 @@ export default function ConversationView({ posts, author, mergeRows }) {
 
       <Box id="comment-section" sx={{ py: 4, pl: 6 }}>
         <GiscusComments />
+        <Text sx={{ fontSize: 0, color: 'fg.muted', textAlign: 'center', display: 'block' }}>You Need Github Account to Comment and dont worry everything stays inside Github, But remember <Text as="a" sx={{
+          color: 'fg.default',
+          textDecoration: 'underline',
+          '&:hover': {
+            color: 'fg.default',
+            textDecoration: 'underline',
+          },
+        }} href="https://github.com/microsoft" target="_blank" rel="noopener noreferrer">Microsoft</Text> is incharge!</Text>
       </Box>
     </>
   );
