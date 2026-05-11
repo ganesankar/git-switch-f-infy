@@ -46,14 +46,14 @@ export const site = {
       name: 'Copilot AI',
       handle: 'copilot[bot]',
       initials: 'CP',
-      avatarUrl: null,
+      avatarUrl: 'https://cdn-icons-png.flaticon.com/32/12208/12208150.png',
       icon: 'copilot',
     },
     infyMgmt: {
       name: 'Scan at Source',
       handle: 'infy-mgmt',
       initials: 'IM',
-      avatarUrl: null,
+      avatarUrl: 'https://cdn-icons-png.flaticon.com/32/9195/9195850.png',
       icon: 'shield',
     },
   },
@@ -61,15 +61,15 @@ export const site = {
   // Map a conversation file slug -> author key from `authors` above.
   // The slug is the filename minus the `YYYY-MM-DD-` date prefix and `.md`.
   postAuthors: {
-    '1-init':     'ganesan',
-    '2-copilot':  'copilot',
+    '1-init': 'ganesan',
+    '2-copilot': 'copilot',
     '3-approved': 'infyMgmt',
   },
 
   // External links shown in the footer. Update these to your real URLs.
   links: {
     linkedin: 'https://www.linkedin.com/in/ganesankar/',
-    website:  'https://ganesankar.dev',
+    website: 'https://ganesankar.dev',
   },
 
   // Status box shown after the timeline (replaces the green Merge button).
@@ -107,6 +107,6 @@ export const giscus = {
   inputPosition: 'bottom',
   theme: 'light',
   lang: 'en',
-  crossorigin:"anonymous",
-  loading:"lazy"
+  crossorigin: "anonymous",
+  loading: "lazy"
 };

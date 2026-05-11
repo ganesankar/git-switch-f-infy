@@ -1,12 +1,16 @@
-import { Box, Heading, Text, Label, LabelGroup, Button } from '@primer/react';
-import { BellSlashIcon, GearIcon } from '@primer/octicons-react';
-import toast from 'react-hot-toast';
+import { Box, Heading, Text, Label, LabelGroup, Button, Avatar } from '@primer/react';
+import { BellIcon, GearIcon, CheckIcon, DotFillIcon, CommentIcon, CopilotIcon, ShieldIcon } from '@primer/octicons-react';
+
+const reviews = [
+  { name: 'Almighty', avatar: 'https://cdn-icons-png.flaticon.com/64/4192/4192040.png', status: 'approved' },
+  { name: 'Family', avatar: 'https://cdn-icons-png.flaticon.com/32/6966/6966266.png', status: 'approved' },
+  { name: 'Copilot', avatar: 'https://cdn-icons-png.flaticon.com/32/12208/12208150.png', status: 'comment' },
+  { name: 'Security Scan Bot', avatar: 'https://cdn-icons-png.flaticon.com/32/9195/9195850.png', status: 'approved' },
+  { name: 'Everyone in this Journey', avatar: 'https://cdn-icons-png.flaticon.com/64/4570/4570603.png', status: 'pending' },
+]
 
 const cannotUnsubscribe = () =>
-  toast(
-    "nice try. you don't get to unsubscribe from this one — time and fate own that switch.",
-    { icon: '⏳' },
-  );
+  window.open('https://about.me/ganesankar/', '_blank');
 
 function Section({ title, children, last = false }) {
   return (
@@ -47,7 +51,24 @@ export default function Sidebar({ milestone }) {
   return (
     <Box sx={{ fontSize: 0, color: 'fg.muted' }}>
       <Section title="Reviewers">
-        <Empty>Everyone who are with me in this journey</Empty>
+
+        {reviews.map((review, index) => (
+          <Box key={review.name} sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: index === 0 ? 4 : 0 }}>
+            <Box sx={{ display: 'flex', alignItems: 'space-between', mb: 2, gap: 2 }}>
+              <Avatar src={review.avatar} alt={review.name} />
+              <Empty> {review.name}</Empty>
+            </Box>
+            <Box sx={{ color: 'fg.muted', display: 'inline-flex' }}>
+              {review.status === 'approved' ? (
+                <CheckIcon size={14} style={{ color: '#2ea44f' }} />
+              ) : review.status === 'comment' ? (
+                <CommentIcon size={14} />
+              ) : (
+                <DotFillIcon size={14} style={{ color: '#ffa000' }} />
+              )}
+            </Box>
+          </Box>
+        ))}
       </Section>
 
       <Section title="Assignees">
@@ -79,9 +100,10 @@ export default function Sidebar({ milestone }) {
       </Section>
 
       <Section title="Notifications" last>
-        <Button leadingVisual={BellSlashIcon} block onClick={cannotUnsubscribe}>
-          Unsubscribe
+        <Button leadingVisual={BellIcon} block onClick={cannotUnsubscribe}>
+          Subscribe
         </Button>
+        <Text sx={{ color: 'fg.default', mt: 1, fontSize: 0, display: 'block', textAlign: 'center' }}>You won't be receiving any notifications.,<br /> Please follow @ganesankar</Text>
       </Section>
     </Box>
   );
