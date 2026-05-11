@@ -1,16 +1,9 @@
 import { Box, Heading, Text, Label, LabelGroup, Button, Avatar } from '@primer/react';
-import { BellIcon, GearIcon, CheckIcon, DotFillIcon, CommentIcon, CopilotIcon, ShieldIcon } from '@primer/octicons-react';
+import { BellIcon, GearIcon, CheckIcon, DotFillIcon, CommentIcon } from '@primer/octicons-react';
+import { reviewers, site } from '../site.config.js';
 
-const reviews = [
-  { name: 'Almighty', avatar: 'https://cdn-icons-png.flaticon.com/64/4192/4192040.png', status: 'approved' },
-  { name: 'Family', avatar: 'https://cdn-icons-png.flaticon.com/32/6966/6966266.png', status: 'approved' },
-  { name: 'Copilot', avatar: 'https://cdn-icons-png.flaticon.com/32/12208/12208150.png', status: 'comment' },
-  { name: 'Security Scan Bot', avatar: 'https://cdn-icons-png.flaticon.com/32/9195/9195850.png', status: 'approved' },
-  { name: 'Everyone in this Journey', avatar: 'https://cdn-icons-png.flaticon.com/64/4570/4570603.png', status: 'pending' },
-]
-
-const cannotUnsubscribe = () =>
-  window.open('https://about.me/ganesankar/', '_blank');
+const openAboutPage = () =>
+  window.open(site.links.about, '_blank', 'noopener,noreferrer');
 
 function Section({ title, children, last = false }) {
   return (
@@ -43,36 +36,43 @@ function Section({ title, children, last = false }) {
   );
 }
 
-const Empty = ({ children }) => (
+const Muted = ({ children }) => (
   <Text sx={{ color: 'fg.muted', fontSize: 0 }}>{children}</Text>
 );
+
+function ReviewerStatus({ status }) {
+  if (status === 'approved') return <CheckIcon size={14} style={{ color: '#2ea44f' }} />;
+  if (status === 'comment')  return <CommentIcon size={14} />;
+  return <DotFillIcon size={14} style={{ color: '#ffa000' }} />;
+}
 
 export default function Sidebar({ milestone }) {
   return (
     <Box sx={{ fontSize: 0, color: 'fg.muted' }}>
       <Section title="Reviewers">
-
-        {reviews.map((review, index) => (
-          <Box key={review.name} sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: index === 0 ? 4 : 0 }}>
-            <Box sx={{ display: 'flex', alignItems: 'space-between', mb: 2, gap: 2 }}>
+        {reviewers.map((review, index) => (
+          <Box
+            key={review.name}
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              gap: 2,
+              mt: index === 0 ? 4 : 0,
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 2 }}>
               <Avatar src={review.avatar} alt={review.name} />
-              <Empty> {review.name}</Empty>
+              <Muted>{review.name}</Muted>
             </Box>
             <Box sx={{ color: 'fg.muted', display: 'inline-flex' }}>
-              {review.status === 'approved' ? (
-                <CheckIcon size={14} style={{ color: '#2ea44f' }} />
-              ) : review.status === 'comment' ? (
-                <CommentIcon size={14} />
-              ) : (
-                <DotFillIcon size={14} style={{ color: '#ffa000' }} />
-              )}
+              <ReviewerStatus status={review.status} />
             </Box>
           </Box>
         ))}
       </Section>
 
       <Section title="Assignees">
-        <Empty>Ganesan Karuppaiya</Empty>
+        <Muted>{site.defaultAuthor.name}</Muted>
       </Section>
 
       <Section title="Labels">
@@ -84,26 +84,38 @@ export default function Sidebar({ milestone }) {
       </Section>
 
       <Section title="Projects">
-        <Empty>Bigger Dreams</Empty>
+        <Muted>Bigger Dreams</Muted>
       </Section>
 
       <Section title="Milestone">
-        <Empty>{milestone || 'v1.0-farewell'}</Empty>
+        <Muted>{milestone || site.prNumber}</Muted>
       </Section>
 
       <Section title="Development">
-        <Empty>
+        <Muted>
           Successfully merging this pull request may close these dreams.
           <br />
           <Text sx={{ color: 'fg.default' }}>None yet — many ahead.</Text>
-        </Empty>
+        </Muted>
       </Section>
 
       <Section title="Notifications" last>
-        <Button leadingVisual={BellIcon} block onClick={cannotUnsubscribe}>
+        <Button leadingVisual={BellIcon} block onClick={openAboutPage}>
           Subscribe
         </Button>
-        <Text sx={{ color: 'fg.default', mt: 1, fontSize: 0, display: 'block', textAlign: 'center' }}>You won't be receiving any notifications.,<br /> Please follow @ganesankar</Text>
+        <Text
+          sx={{
+            color: 'fg.default',
+            mt: 1,
+            fontSize: 0,
+            display: 'block',
+            textAlign: 'center',
+          }}
+        >
+          You won't be receiving any notifications.
+          <br />
+          Please follow @{site.defaultAuthor.handle}
+        </Text>
       </Section>
     </Box>
   );

@@ -1,12 +1,25 @@
-import { Box } from '@primer/react';
+import { Box, Text, Timeline } from '@primer/react';
 import ConversationCard from './ConversationCard.jsx';
 import MergeBox from './MergeBox.jsx';
 import GiscusComments from './GiscusComments.jsx';
-import { useRef } from 'react';
+import { timelineEvents } from '../site.config.js';
+
+const Bold = ({ children }) => (
+  <Text sx={{ fontWeight: 'bold' }}>{children}</Text>
+);
+
+// `parts` is the data-only shape from site.config.js: an array of plain
+// strings and `{ bold: '...' }` objects. Render strings as text and bold
+// fragments as a Primer <Text fontWeight="bold">.
+function renderBody(parts) {
+  return parts.map((part, i) =>
+    typeof part === 'string'
+      ? <span key={i}>{part}</span>
+      : <Bold key={i}>{part.bold}</Bold>
+  );
+}
 
 export default function ConversationView({ posts, author, mergeRows }) {
-  const bottomRef = useRef(null);
-
   if (posts.length === 0) {
     return (
       <Box
@@ -27,15 +40,36 @@ export default function ConversationView({ posts, author, mergeRows }) {
 
   return (
     <>
-      {posts.map((post) => (
-        <ConversationCard
-          key={post.filename}
-          post={post}
-          author={post.author || author}
-        />
-      ))}
-      <MergeBox rows={mergeRows} />
-      <Box ref={bottomRef} id="comment-section" sx={{ py: 4 }}>
+      <Box sx={{ position: 'relative' }}>
+        {posts.map((post) => (
+          <ConversationCard
+            key={post.filename}
+            post={post}
+            author={post.author || author}
+          />
+        ))}
+      </Box>
+
+      <Box sx={{ px: 8, my: -3 }}>
+        <Timeline>
+          {timelineEvents.map(({ id, icon: Icon, iconLabel, badgeSx, body }) => (
+            <Timeline.Item key={id}>
+              <Timeline.Badge sx={badgeSx}>
+                <Icon aria-label={iconLabel} />
+              </Timeline.Badge>
+              <Timeline.Body>{renderBody(body)}</Timeline.Body>
+            </Timeline.Item>
+          ))}
+          <Timeline.Break />
+        </Timeline>
+      </Box>
+
+      <Box sx={{ pl: 6 }}>
+        &nbsp;
+        <MergeBox rows={mergeRows} />
+      </Box>
+
+      <Box id="comment-section" sx={{ py: 4, pl: 6 }}>
         <GiscusComments />
       </Box>
     </>

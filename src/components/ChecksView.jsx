@@ -1,8 +1,7 @@
 import { Box, Heading, Text } from '@primer/react';
 import { CheckCircleFillIcon } from '@primer/octicons-react';
 import toast from 'react-hot-toast';
-
-const BLOG_URL = 'https://ganesan.dev/blog';
+import { site } from '../site.config.js';
 
 const showBlogToast = () =>
   toast(
@@ -10,7 +9,7 @@ const showBlogToast = () =>
       <span>
         if you know me, this is old check. if you don't — that's the first thing to{' '}
         <a
-          href={BLOG_URL}
+          href={site.links.blog}
           target="_blank"
           rel="noreferrer"
           style={{ color: '#0969da', textDecoration: 'none', fontWeight: 600 }}

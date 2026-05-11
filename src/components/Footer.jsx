@@ -1,19 +1,4 @@
-import { Box, Link, Text } from '@primer/react';
-import {
-  CodeIcon,
-  MailIcon,
-  GitPullRequestIcon,
-  PencilIcon,
-  ProjectIcon,
-  BookIcon,
-} from '@primer/octicons-react';
-
-const items = [
-  { label: 'Website', icon: CodeIcon, href: 'https://ganesan.dev' },
-  { label: 'Code', icon: MailIcon, count: 0, href: 'https://github.com/ganesankar/git-switch-f-infy' },
-  { label: 'LinkedIn', icon: GitPullRequestIcon, count: 1, active: true, href: 'https://www.linkedin.com/in/ganesankar/' },
-  { label: 'Github', icon: PencilIcon, href: 'https://github.com/ganesankar' },
-];
+import { Box, Text } from '@primer/react';
 
 export default function Footer() {
   return (
@@ -43,25 +28,6 @@ export default function Footer() {
         }}
       >
         <Text>© 2026 Ganesan Karuppaiya</Text>
-        {items.map((it, key) => (
-          <Text key={it.label} >
-            <Text aria-hidden sx={{
-
-            }}>&nbsp;· &nbsp;</Text>
-            <Link as="a"
-
-              href={it.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => { e.preventDefault(); window.open(it.href, '_blank'); }}
-            >
-              {it.label}
-            </Link>
-
-          </Text>
-        ))}
-
-
       </Box>
       <Box
         sx={{
@@ -72,12 +38,10 @@ export default function Footer() {
           justifyContent: 'center',
         }}
       >
-        <Text> Do not share any personal information here.</Text>
+        <Text>Do not share any personal information here.</Text>
         <Text aria-hidden>·</Text>
-        <Text> GitHub-themed on purpose — a thank-you for a decade of commits.</Text>
-
+        <Text>GitHub-themed on purpose — a thank-you for a decade of commits.</Text>
       </Box>
-
     </Box>
   );
 }

@@ -47,29 +47,6 @@ function groupByMonth(commits) {
   return [...groups.entries()];
 }
 
-function AuthorAvatar({ author }) {
-  return (
-    <Box
-      aria-label={author.name}
-      sx={{
-        width: 24,
-        height: 24,
-        borderRadius: '50%',
-        background: 'linear-gradient(135deg, #1f6feb, #8957e5)',
-        color: '#fff',
-        fontWeight: 600,
-        fontSize: 10,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-      }}
-    >
-      {author.initials}
-    </Box>
-  );
-}
-
 function CommitRow({ commit, author, isLast }) {
   const seed  = `${commit.type}-${commit.scope}-${commit.subject}`;
   const sha   = shortSha(seed);

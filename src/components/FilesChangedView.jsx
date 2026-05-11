@@ -1,15 +1,15 @@
-import { useState, useMemo } from 'react';
-import { Box, Heading, Text, TextInput, IconButton } from '@primer/react';
+import { useState, useMemo, useRef } from 'react';
+import { Box, Heading, Text, TextInput, IconButton, TreeView } from '@primer/react';
 import {
   ChevronDownIcon,
   ChevronRightIcon,
   FileIcon,
   SearchIcon,
   KebabHorizontalIcon,
+  DiffAddedIcon,
 } from '@primer/octicons-react';
 
 function DiffStat({ additions }) {
-  // Five blocks total — green ones for additions (capped at 5), grey otherwise.
   const filled = Math.min(5, Math.max(1, Math.round(additions / 4)));
   return (
     <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, ml: 2 }}>
@@ -33,10 +33,11 @@ function DiffStat({ additions }) {
   );
 }
 
-function FileRow({ file, expanded, onToggle }) {
+function FileRow({ file, expanded, onToggle, setRowRef }) {
   const filepath = file.path || file.filename;
   return (
     <Box
+      ref={setRowRef}
       sx={{
         border: '1px solid',
         borderColor: 'border.default',
@@ -44,6 +45,7 @@ function FileRow({ file, expanded, onToggle }) {
         bg: 'canvas.default',
         mb: 3,
         overflow: 'hidden',
+        scrollMarginTop: 16,
       }}
     >
       <Box
@@ -102,9 +104,101 @@ function FileRow({ file, expanded, onToggle }) {
   );
 }
 
+/* ---------- Tree building ---------- */
+
+// Turn a flat list of files into a nested tree based on path segments.
+// Returns: Array<{ id, name, file?, children }> where children is the same shape.
+function buildFileTree(files) {
+  const root = { children: new Map() };
+
+  for (const file of files) {
+    const segments = (file.path || file.filename).split('/').filter(Boolean);
+    let node = root;
+    let idPath = '';
+    segments.forEach((seg, i) => {
+      idPath = idPath ? `${idPath}/${seg}` : seg;
+      if (!node.children.has(seg)) {
+        node.children.set(seg, {
+          id: idPath,
+          name: seg,
+          file: null,
+          children: new Map(),
+        });
+      }
+      node = node.children.get(seg);
+      if (i === segments.length - 1) {
+        node.file = file;
+      }
+    });
+  }
+
+  const toArray = (mapNode) => {
+    const arr = Array.from(mapNode.children.values()).map((child) => ({
+      id: child.id,
+      name: child.name,
+      file: child.file,
+      children: toArray(child),
+    }));
+    // Directories first, then files; alpha within each group.
+    arr.sort((a, b) => {
+      const aIsDir = a.children.length > 0 && !a.file;
+      const bIsDir = b.children.length > 0 && !b.file;
+      if (aIsDir !== bIsDir) return aIsDir ? -1 : 1;
+      return a.name.localeCompare(b.name);
+    });
+    return arr;
+  };
+
+  return toArray(root);
+}
+
+function TreeNodes({ nodes, currentId, onSelectFile }) {
+  return nodes.map((node) => {
+    const isLeaf = !!node.file && node.children.length === 0;
+    if (isLeaf) {
+      return (
+        <TreeView.Item
+          key={node.id}
+          id={node.id}
+          current={currentId === node.id}
+          onSelect={() => onSelectFile(node.file)}
+        >
+          <TreeView.LeadingVisual>
+            <FileIcon />
+          </TreeView.LeadingVisual>
+          {node.name}
+          <TreeView.TrailingVisual label="Added">
+            <DiffAddedIcon fill="var(--fgColor-success, #1a7f37)" />
+          </TreeView.TrailingVisual>
+        </TreeView.Item>
+      );
+    }
+    return (
+      <TreeView.Item key={node.id} id={node.id} defaultExpanded>
+        <TreeView.LeadingVisual>
+          <TreeView.DirectoryIcon />
+        </TreeView.LeadingVisual>
+        {node.name}
+        <TreeView.SubTree>
+          <TreeNodes
+            nodes={node.children}
+            currentId={currentId}
+            onSelectFile={onSelectFile}
+          />
+        </TreeView.SubTree>
+      </TreeView.Item>
+    );
+  });
+}
+
+/* ---------- Main view ---------- */
+
 export default function FilesChangedView({ files }) {
   const [filter, setFilter] = useState('');
   const [expanded, setExpanded] = useState(() => new Set(files.map((f) => f.filename)));
+  const [currentId, setCurrentId] = useState(null);
+
+  const rowRefs = useRef(new Map());
 
   const filtered = useMemo(() => {
     const q = filter.trim().toLowerCase();
@@ -116,18 +210,38 @@ export default function FilesChangedView({ files }) {
     );
   }, [filter, files]);
 
+  const tree = useMemo(() => buildFileTree(filtered), [filtered]);
+
   const totalAdditions = filtered.reduce((sum, f) => sum + f.additions, 0);
 
   function toggle(filename) {
     setExpanded((prev) => {
       const next = new Set(prev);
-      if (next.has(filename)) next.delete(filename); else next.add(filename);
+      if (next.has(filename)) next.delete(filename);
+      else next.add(filename);
       return next;
     });
   }
 
   function setAll(value) {
     setExpanded(value ? new Set(files.map((f) => f.filename)) : new Set());
+  }
+
+  function selectFileFromTree(file) {
+    setCurrentId(file.path || file.filename);
+    setExpanded((prev) => {
+      if (prev.has(file.filename)) return prev;
+      const next = new Set(prev);
+      next.add(file.filename);
+      return next;
+    });
+    // Defer to next frame so the row has expanded before we scroll.
+    requestAnimationFrame(() => {
+      const el = rowRefs.current.get(file.filename);
+      if (el && typeof el.scrollIntoView === 'function') {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   }
 
   return (
@@ -192,14 +306,60 @@ export default function FilesChangedView({ files }) {
         </Box>
       </Box>
 
-      {filtered.map((file) => (
-        <FileRow
-          key={file.filename}
-          file={file}
-          expanded={expanded.has(file.filename)}
-          onToggle={() => toggle(file.filename)}
-        />
-      ))}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: ['1fr', '1fr', '240px minmax(0, 1fr)'],
+          gap: 3,
+          alignItems: 'start',
+        }}
+      >
+        <Box
+          aria-label="File tree"
+          sx={{
+            display: ['none', 'none', 'block'],
+            position: 'sticky',
+            top: 16,
+            alignSelf: 'start',
+            border: '1px solid',
+            borderColor: 'border.default',
+            borderRadius: 2,
+            bg: 'canvas.default',
+            p: 2,
+            maxHeight: 'calc(100vh - 32px)',
+            overflow: 'auto',
+          }}
+        >
+          {tree.length === 0 ? (
+            <Text sx={{ color: 'fg.muted', fontSize: 0, px: 1 }}>
+              No files match the filter.
+            </Text>
+          ) : (
+            <TreeView aria-label="Files changed">
+              <TreeNodes
+                nodes={tree}
+                currentId={currentId}
+                onSelectFile={selectFileFromTree}
+              />
+            </TreeView>
+          )}
+        </Box>
+
+        <Box sx={{ minWidth: 0 }}>
+          {filtered.map((file) => (
+            <FileRow
+              key={file.filename}
+              file={file}
+              expanded={expanded.has(file.filename)}
+              onToggle={() => toggle(file.filename)}
+              setRowRef={(el) => {
+                if (el) rowRefs.current.set(file.filename, el);
+                else rowRefs.current.delete(file.filename);
+              }}
+            />
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 }

@@ -208,3 +208,28 @@ body {
 .gl-md figure[data-rehype-pretty-code-figure] pre code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 2.25rem;
 }
+
+
+/* GitHub-style speech-bubble caret on the comment header.
+   The :before draws the border-colored layer and the :after draws the canvas-colored
+   fill 2px to the right, so the 2px sliver of :before that shows on the tip reads as
+   a 1px-ish border around the triangle. */
+.timeline-comment--caret::before,
+.timeline-comment--caret::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: -8px;
+  width: 8px;
+  height: 16px;
+  display: block;
+  pointer-events: none;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+.timeline-comment--caret::before {
+  background-color: var(--borderColor-default, #d1d9e0);
+}
+.timeline-comment--caret::after {
+  background-color: var(--bgColor-muted, #f6f8fa);
+  margin-left: 2px;
+}

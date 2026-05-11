@@ -1,6 +1,32 @@
 // Single source of truth for the page header, repo identity, status,
-// merge-box copy, lock banner, and giscus. Edit values here — no other file
-// needs to change.
+// merge-box copy, lock banner, giscus, plus the lists of items rendered by
+// the top bar, repo nav, PR sub-nav, conversation timeline, and sidebar.
+// Edit values here — components consume from this file.
+
+import {
+  CommentDiscussionIcon,
+  GitCommitIcon,
+  CheckCircleIcon,
+  FileDiffIcon,
+  CodeIcon,
+  MailIcon,
+  GitPullRequestIcon,
+  PencilIcon,
+  ProjectIcon,
+  BookIcon,
+  EyeIcon,
+  CheckIcon,
+  GitPullRequestClosedIcon,
+} from '@primer/octicons-react';
+import {
+  IoEarth,
+  IoLogoFacebook,
+  IoLogoLinkedin,
+  IoLogoGithub,
+  IoLogoInstagram,
+  IoLogoSnapchat,
+} from 'react-icons/io5';
+import { BsTwitterX, BsTelegram } from 'react-icons/bs';
 
 export const site = {
   // Topbar repo path: "<owner> / <repo>"
@@ -66,10 +92,13 @@ export const site = {
     '3-approved': 'infyMgmt',
   },
 
-  // External links shown in the footer. Update these to your real URLs.
+  // External links shown in the footer and elsewhere.
   links: {
     linkedin: 'https://www.linkedin.com/in/ganesankar/',
     website: 'https://ganesankar.dev',
+    blog: 'https://ganesan.dev/blog',
+    about: 'https://about.me/ganesankar/',
+    mailto: 'mailto:ganesank@live.com?subject=Hello',
   },
 
   // Status box shown after the timeline (replaces the green Merge button).
@@ -107,6 +136,97 @@ export const giscus = {
   inputPosition: 'bottom',
   theme: 'light',
   lang: 'en',
-  crossorigin: "anonymous",
-  loading: "lazy"
+  crossorigin: 'anonymous',
+  loading: 'lazy',
 };
+
+// ---------- PR sub-nav tabs ----------
+
+export const TAB_IDS = {
+  conversation: 'conversation',
+  commits: 'commits',
+  checks: 'checks',
+  files: 'files',
+};
+
+export const prTabs = [
+  { id: TAB_IDS.conversation, label: 'Conversation',    icon: CommentDiscussionIcon },
+  { id: TAB_IDS.commits,      label: 'Commits',         icon: GitCommitIcon },
+  { id: TAB_IDS.checks,       label: 'Checks',          icon: CheckCircleIcon },
+  { id: TAB_IDS.files,        label: 'Files changed',   icon: FileDiffIcon },
+];
+
+// ---------- Repo-level nav (under the topbar) ----------
+
+export const repoNavItems = [
+  { label: 'Code',          icon: CodeIcon,            href: 'https://github.com/ganesankar/git-switch-f-infy' },
+  { label: 'Issues',        icon: MailIcon,            href: 'https://github.com/ganesankar/git-switch-f-infy/issues', count: 0 },
+  { label: 'Pull requests', icon: GitPullRequestIcon,  href: 'https://ganesankar.github.io/git-switch-f-infy/',         count: 1, active: true },
+  { label: 'Writing',       icon: PencilIcon,          href: 'https://ganesan.dev/blog' },
+  { label: 'History',       icon: ProjectIcon,         href: 'https://ganesan.dev/resume' },
+  { label: 'Wiki',          icon: BookIcon,            href: 'http://ganesan.dev' },
+];
+
+// ---------- Topbar social menu + primary links ----------
+
+export const topbarLinks = {
+  website: { url: 'https://www.ganesan.dev', label: 'Website', icon: IoEarth },
+  mail:    { url: site.links.mailto,         label: 'Mail',    ariaLabel: 'Email Ganesan' },
+};
+
+export const socialLinks = [
+  { icon: IoLogoLinkedin,  title: 'LinkedIn',  url: 'https://www.linkedin.com/in/ganesankar/' },
+  { icon: IoLogoGithub,    title: 'Github',    url: 'https://github.com/ganesankar' },
+  { icon: IoLogoFacebook,  title: 'Facebook',  url: 'https://www.facebook.com/ganesankars' },
+  { icon: IoLogoInstagram, title: 'Instagram', url: 'https://www.instagram.com/ganesankar' },
+  { icon: BsTwitterX,      title: 'Twitter',   url: 'https://www.twitter.com/ganesankar' },
+  { icon: IoLogoSnapchat,  title: 'Snapchat',  url: 'https://www.snapchat.com/add/ganesankar' },
+  { icon: BsTelegram,      title: 'Telegram',  url: 'https://t.me/ganesankar' },
+];
+
+// ---------- Sidebar (right rail) — reviewers ----------
+
+export const reviewers = [
+  { name: 'Copilot',                avatar: 'https://cdn-icons-png.flaticon.com/32/12208/12208150.png', status: 'comment'  },
+  { name: 'Security Scan Bot',      avatar: 'https://cdn-icons-png.flaticon.com/32/9195/9195850.png',   status: 'approved' },
+  { name: 'Everyone in this Journey', avatar: 'https://cdn-icons-png.flaticon.com/64/4570/4570603.png', status: 'pending'  },
+];
+
+// ---------- Conversation timeline events ----------
+//
+// `body` is an array of mixed plain strings and `{ bold: '...' }` objects.
+// The component renders strings as text and { bold } as a bold <Text>. This
+// keeps the config file pure data (no JSX).
+
+export const timelineEvents = [
+  {
+    id: 'commit',
+    icon: GitCommitIcon,
+    iconLabel: 'Commit',
+    body: [{ bold: 'Ganesan Karuppaiya' }, ' committed 4 files'],
+  },
+  {
+    id: 'review-requested',
+    icon: EyeIcon,
+    iconLabel: 'Review requested',
+    body: [
+      { bold: 'Ganesan Karuppaiya' },
+      ' requested a review from ',
+      { bold: 'Everyone in this Journey' },
+    ],
+  },
+  {
+    id: 'approved',
+    icon: CheckIcon,
+    iconLabel: 'Approved',
+    badgeSx: { bg: 'success.emphasis', color: 'fg.onEmphasis' },
+    body: [{ bold: 'Copilot' }, ' approved these changes with comments'],
+  },
+  {
+    id: 'unmerged',
+    icon: GitPullRequestClosedIcon,
+    iconLabel: 'Unmerged',
+    badgeSx: { bg: 'closed.emphasis', color: 'fg.onEmphasis' },
+    body: [{ bold: 'Ganesan Karuppaiya' }, ' unmerged this pull request'],
+  },
+];

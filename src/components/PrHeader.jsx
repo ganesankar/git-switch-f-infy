@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Token, IconButton, Button } from '@primer/react';
+import { Box, Heading, Text, Token, Button } from '@primer/react';
 import {
   PencilIcon,
   GitPullRequestIcon,
@@ -57,6 +57,7 @@ export default function PrHeader({
   authorName,
   authorHandle,
   commitsLabel,
+  onSubmitReview,
 }) {
   const verb = STATUS_VERB[status] || STATUS_VERB.open;
   const displayAuthor = authorHandle ? `${authorName} (${authorHandle})` : authorName;
@@ -87,10 +88,11 @@ export default function PrHeader({
           )}
         </Heading>
 
-        <IconButton icon={PencilIcon} aria-label="Edit" size="small" variant="invisible" />
-        <Button trailingVisual={() => <span style={{ color: 'var(--fgColor-muted)' }}>▾</span>}>
-          Code
-        </Button>
+        {onSubmitReview && (
+          <Button variant="primary" leadingVisual={PencilIcon} onClick={onSubmitReview}>
+            Submit Review
+          </Button>
+        )}
       </Box>
 
       <Box

@@ -1,29 +1,10 @@
-import { Box, CounterLabel, Button } from '@primer/react';
-import {
-  CommentDiscussionIcon,
-  GitCommitIcon,
-  CheckCircleIcon,
-  FileDiffIcon,
-  PencilIcon
-} from '@primer/octicons-react';
+import { Box, CounterLabel } from '@primer/react';
+import { prTabs, TAB_IDS } from '../site.config.js';
 
-export const TAB_IDS = {
-  conversation: 'conversation',
-  commits: 'commits',
-  checks: 'checks',
-  files: 'files',
-};
-
-const TABS = [
-  { id: TAB_IDS.conversation, label: 'Conversation', icon: CommentDiscussionIcon },
-  { id: TAB_IDS.commits, label: 'Commits', icon: GitCommitIcon },
-  { id: TAB_IDS.checks, label: 'Checks', icon: CheckCircleIcon },
-  { id: TAB_IDS.files, label: 'Files changed', icon: FileDiffIcon },
-];
+// Re-export for backwards compatibility (App.jsx imports TAB_IDS from here too).
+export { TAB_IDS };
 
 export default function PrSubNav({ activeTab, onTabChange, counts = {} }) {
-  const element = document.getElementById("comment-section");
-
   return (
     <Box
       sx={{
@@ -44,7 +25,7 @@ export default function PrSubNav({ activeTab, onTabChange, counts = {} }) {
           flexWrap: 'wrap',
         }}
       >
-        {TABS.map((t) => {
+        {prTabs.map((t) => {
           const isActive = activeTab === t.id;
           const Icon = t.icon;
           return (
@@ -110,32 +91,6 @@ export default function PrSubNav({ activeTab, onTabChange, counts = {} }) {
             </Box>
           );
         })}
-      </Box>
-      <Box sx={{
-
-
-        display: activeTab != 'files' ? 'none' : 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 2,
-        padding: "8px",
-        borderBottom: '1px solid',
-        borderColor: 'border.default',
-        borderRadius: 2,
-        mb: 1,
-      }}>
-        <Button variant="default" onClick={() => {
-          onTabChange("commits");
-        }}> All Commits</Button>
-        <Button variant="primary" onClick={() => {
-          onTabChange("conversation");
-          setTimeout(() => {
-            const element = document.getElementById("comment-section");
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
-            }
-          }, 100);
-        }}> <PencilIcon size={16} /> Submit Review</Button>
       </Box>
     </Box>
   );
