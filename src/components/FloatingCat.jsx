@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { site } from '../site.config.js';
 import './FloatingCat.css';
+
+const REPO_URL = `https://github.com/${site.defaultAuthor.handle}`;
 
 const BASE_BOTTOM = 20;
 const FOOTER_GAP = 8;
@@ -38,8 +42,41 @@ export default function FloatingCat({ footerRef }) {
     };
   }, [footerRef]);
 
+  const showCatToast = () =>
+    toast(
+      (
+        <span>
+          <b> My Family Cats</b>
+         <br/>
+         <br/>
+         <img src="https://cdn-icons-png.flaticon.com/64/16461/16461811.png" alt="My Family Cats" width={100} height={100} />
+         <br/>
+         <br/>
+         <b> My Family Cats</b>
+         <br/>
+         <br/>
+         <img src="https://cdn-icons-png.flaticon.com/64/16461/16461811.png" alt="My Family Cats" width={100} height={100} />
+         <br/>
+         <br/>
+         <b> My Family Cats</b>
+         <br/>
+         <br/>
+         <img src="https://cdn-icons-png.flaticon.com/64/16461/16461811.png" alt="My Family Cats" width={100} height={100} />
+        </span>
+      ),
+      { icon: '😜', duration: 6000 },
+    );
+
   return (
-    <div className="gl-cat" aria-hidden="true" style={{ bottom: `${bottomPx}px` }}>
+    <a
+      className="gl-cat"
+      href={REPO_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${site.defaultAuthor.name} on GitHub — kawaii cat`}
+      style={{ bottom: `${bottomPx}px` }}
+      /* onClick={showCatToast} */
+    >
       <article role="img" aria-label="Cartoon of a black cat drawn in cute kawaii style">
         <div className="shadow"></div>
         <div className="tail"></div>
@@ -63,6 +100,6 @@ export default function FloatingCat({ footerRef }) {
           </div>
         </div>
       </article>
-    </div>
+    </a>
   );
 }

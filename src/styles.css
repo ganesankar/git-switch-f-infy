@@ -233,3 +233,13 @@ body {
   background-color: var(--bgColor-muted, #f6f8fa);
   margin-left: 2px;
 }
+
+.conversation-card-line:after {
+  content: "";
+  position: absolute;
+  margin-left: 80px;
+  border-left: 2px solid #dedede;
+  height: 26px;
+  display: block;
+  margin-top: -9px;
+}

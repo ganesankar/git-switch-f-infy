@@ -8,12 +8,15 @@
   --fur-dark: #111;
   --skin: pink;
 
+  display: block;
   position: fixed;
   right: 20px;
   z-index: 50;
   width: var(--cat-size);
   height: var(--cat-size);
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 @keyframes gl-cat-blink {

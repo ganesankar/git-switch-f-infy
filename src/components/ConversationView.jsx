@@ -78,7 +78,7 @@ export default function ConversationView({ posts, author, mergeRows }) {
             color: 'fg.default',
             textDecoration: 'underline',
           },
-        }} href="https://github.com/microsoft" target="_blank" rel="noopener noreferrer">Microsoft</Text> is incharge!</Text>
+        }} href="https://github.com/microsoft" target="_blank" rel="noopener noreferrer">Microsoft</Text> owns it</Text>
       </Box>
     </>
   );

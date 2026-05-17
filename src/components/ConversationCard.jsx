@@ -44,6 +44,7 @@ function AuthorAvatar({ author }) {
 export default function ConversationCard({ post, author }) {
   return (
     <Box
+      className='conversation-card'
       as="article"
       sx={{
         display: 'grid',
@@ -99,6 +100,7 @@ export default function ConversationCard({ post, author }) {
        
         </Box>
       </Box>
+      <div className="conversation-card-line"></div>
     </Box>
   );
 }

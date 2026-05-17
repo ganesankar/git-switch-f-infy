@@ -80,6 +80,9 @@ export default function Sidebar({ milestone }) {
           <Label variant="accent">farewell</Label>
           <Label variant="success">gratitude</Label>
           <Label variant="attention">new-endeavors</Label>
+          <Label variant="secondary">this-too-shall-pass</Label>
+          <Label variant="secondary">இதுவும் கடந்து போகும்</Label>
+          <Label variant="sponsors">நற்றுணையாவது-நமச்சிவாயவே</Label>
         </LabelGroup>
       </Section>
 
@@ -112,10 +115,7 @@ export default function Sidebar({ milestone }) {
             textAlign: 'center',
           }}
         >
-          You won't be receiving any notifications.
-          <br />
-          Please follow @{site.defaultAuthor.handle}
-        </Text>
+          It's Not Mail Spam.  I am available at some social media platforms, include me if you like to connect.      </Text>
       </Section>
     </Box>
   );
