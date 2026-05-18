@@ -97,7 +97,7 @@ export const site = {
     linkedin: 'https://www.linkedin.com/in/ganesankar/',
     website: 'https://ganesankar.dev',
     blog: 'https://ganesan.dev/blog',
-    about: 'https://about.me/ganesankar/',
+    about: 'https://ganesankar.github.io/',
     mailto: 'mailto:ganesank@live.com?subject=Hello',
   },
 

@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { site } from '../site.config.js';
 import './FloatingCat.css';
 
-const REPO_URL = `https://github.com/${site.defaultAuthor.handle}`;
+const REPO_URL = `https://ganesankar.github.io`;
 
 const BASE_BOTTOM = 20;
 const FOOTER_GAP = 8;
