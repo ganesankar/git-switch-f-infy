@@ -20,7 +20,7 @@ const STATUS_VERB = {
   draft:    'is preparing to add posts to',
   merged:   'merged this pull request — ',
   closed:   'closed this pull request — ',
-  unmerged: 'closed this pull request without merging',
+  unmerged: 'opened this pull (out) request with',
 };
 
 function StatusBadge({ status }) {
@@ -36,7 +36,7 @@ function StatusBadge({ status }) {
         color: '#ffffff',
         fontWeight: 500,
         fontSize: 12,
-        padding: '4px 10px',
+        padding: '8px 10px',
         borderRadius: 999,
         lineHeight: 1,
       }}

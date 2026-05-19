@@ -28,35 +28,38 @@ follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Decided
 - Closed the `stay-in-infy` branch with respect.
-- Merged in `bigger-dreams` quietly.
+- Merging in `bigger-dreams` quietly.
 
 ## [v0.4-usa] — 2024 → 2025
 
 ### Added
-- Landed in Beaverton. Developed amazing things for Nike 
-- Returned home (`feat: homecoming`).
-
-## [v0.3-canada-usa] — 2021 → 2023
-
-### Added
-- Landed in Vancouver. New geographies, new colleagues, new humility.
-- Lived here a long enough to be crazy 
-- Returned home (`feat: homecoming`).
+- Landed in Beaverton, OR — Nike World Headquarters. Privileged to sit where the product decisions are made.
+- Built **Traceability Application**  from Beaverton.
+- Returned home to Chennai — `feat(homecoming)` — an unavoidable situation, no regrets.
 
 
-## [v0.2-nike] — 2018 → 2019
+## [v0.3-canada] — 2021 → 2023
 
 ### Added
-- Joined in Nike Acccount as first member in that team
-- Did POC and demo to stake holders
-- Built a MVP for capacity managment application for, which later on built in full fledged application 
+- Landed in Vancouver, BC — new geography, new colleagues, new humility.
+- built **Sourcing Transfer Tracker**  and shipped there.
+- Enough snow to last a lifetime. Exactly enough.
+- Returned home to Chennai — `feat(homecoming)` — round one.
 
-## [v0.1-ajio] — 2018 → 2019
-
-### Added
-- Bangalore travel for AJIO — built a retail B2B from the ground up, Lead the UI team.
-
-## [v0.1-init] — 2018
+## [v0.2-nike] — 2018 → 2021
 
 ### Added
-- A hungrier mind walked in as stranger, joined as a Tech Lead 
+- Joined the Nike account as the first member of the team. No playbook. Wrote one.
+- Built a POC and demoed to stakeholders — got the green light.
+- Built **Capacity Visibility** & **Compliance Platform**.
+
+## [v0.1-ajio] — 2018
+
+### Added
+- Bangalore travel — **B2B E-Commerce Storefront** for AJIO .
+- Insta Award (Aug 2018) — first recognition, first of many.
+
+## [v0.1-init] — Feb 2018
+
+### Added
+- A hungrier mind walked in as a stranger. Joined as Tech Lead with huge expectations and a hungrier mind.

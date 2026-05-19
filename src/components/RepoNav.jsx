@@ -16,13 +16,12 @@ export default function RepoNav() {
         {repoNavItems.map((it) => (
           <UnderlineNav.Item
             key={it.label}
+            href={it.href}
+            target="_blank"
+            rel="noopener noreferrer"
             icon={it.icon}
             counter={it.count}
             aria-current={it.active ? 'page' : undefined}
-            onSelect={(e) => {
-              e.preventDefault();
-              window.open(it.href, '_blank', 'noopener,noreferrer');
-            }}
           >
             {it.label}
           </UnderlineNav.Item>

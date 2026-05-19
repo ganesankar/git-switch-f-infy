@@ -115,7 +115,7 @@ export default function Sidebar({ milestone }) {
             textAlign: 'center',
           }}
         >
-          It's Not Mail Spam.  I am available at some social media platforms, include me if you like to connect.      </Text>
+          It's just links to my social media platforms. <br/>Hope you play with the UI     </Text>
       </Section>
     </Box>
   );
