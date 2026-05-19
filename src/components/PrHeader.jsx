@@ -90,7 +90,7 @@ export default function PrHeader({
 
         {onSubmitReview && (
           <Button variant="primary" leadingVisual={PencilIcon} onClick={onSubmitReview}>
-            Submit Review
+            Submit Comment
           </Button>
         )}
       </Box>

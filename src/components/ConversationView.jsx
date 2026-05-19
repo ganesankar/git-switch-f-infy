@@ -78,7 +78,15 @@ export default function ConversationView({ posts, author, mergeRows }) {
             color: 'fg.default',
             textDecoration: 'underline',
           },
-        }} href="https://github.com/microsoft" target="_blank" rel="noopener noreferrer">Microsoft</Text> owns it</Text>
+        }} href="https://github.com/microsoft" target="_blank" rel="noopener noreferrer">Microsoft</Text> owns it <br/>
+        I could use <Text as="a" sx={{
+          color: 'fg.default',
+          textDecoration: 'underline',
+          '&:hover': {
+            color: 'fg.default',
+            textDecoration: 'underline',
+          },
+        }} href="https://disqus.com/" target="_blank" rel="noopener noreferrer">Disqus</Text>  or other platforms to simplify the commenting process, I have decided to use Giscus to maintain a more authentic feel of Github.</Text>
       </Box>
     </>
   );
