@@ -61,7 +61,7 @@ export default function Footer() {
             color: "fg.link",
             textDecoration: "underline",
           },
-        }} href="https://github.com/git-guides" target="_blank" rel="noopener noreferrer">What is Github?</Text>
+        }} href="https://github.com/about" target="_blank" rel="noopener noreferrer">What is Github?</Text>
       </Text>
       <Text
         as="p"

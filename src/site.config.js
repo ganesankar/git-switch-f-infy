@@ -76,7 +76,7 @@ export const site = {
       icon: 'copilot',
     },
     infyMgmt: {
-      name: 'Scan at Source',
+      name: 'Security Scan Bot',
       handle: 'infy-mgmt',
       initials: 'IM',
       avatarUrl: 'https://cdn-icons-png.flaticon.com/32/9195/9195850.png',
@@ -170,8 +170,9 @@ export const repoNavItems = [
 // ---------- Topbar social menu + primary links ----------
 
 export const topbarLinks = {
-  website: { url: 'https://www.ganesan.dev', label: 'Website', icon: IoEarth },
+  website: { url: 'https://ganesan.dev', label: 'Website', icon: IoEarth },
   mail:    { url: site.links.mailto,         label: 'Mail',    ariaLabel: 'Email Ganesan' },
+  social:  { url: 'https://ganesankar.github.io',         label: 'Social',  ariaLabel: 'Social Media' },
 };
 
 export const socialLinks = [

@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, ActionMenu, ActionList } from '@primer/react';
-import { MarkGithubIcon, LockIcon, MailIcon } from '@primer/octicons-react';
-import { socialLinks, topbarLinks } from '../site.config.js';
+import { MarkGithubIcon, LockIcon, MailIcon, LinkIcon  } from '@primer/octicons-react';
+import { topbarLinks } from '../site.config.js';
 
 export default function TopBar({ owner, repo, visibility }) {
   return (
@@ -63,43 +63,25 @@ export default function TopBar({ owner, repo, visibility }) {
           aria-label={topbarLinks.website.label}
           leadingVisual={topbarLinks.website.icon}
         >
-          {topbarLinks.website.label}
         </Button>
         <Button
           as="a"
           href={topbarLinks.mail.url}
           aria-label={topbarLinks.mail.ariaLabel}
           leadingVisual={MailIcon}
+          target="_blank"
+          rel="noreferrer"
         >
-          {topbarLinks.mail.label}
         </Button>
-        <ActionMenu>
-          <ActionMenu.Button>Social</ActionMenu.Button>
-          <ActionMenu.Overlay>
-            <ActionList>
-              {socialLinks.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <ActionList.Item
-                    key={link.title}
-                    onSelect={() => window.open(link.url, '_blank', 'noopener,noreferrer')}
-                  >
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 1,
-                        color: 'fg.muted',
-                      }}
-                    >
-                      <Icon size={16} /> {link.title}
-                    </Box>
-                  </ActionList.Item>
-                );
-              })}
-            </ActionList>
-          </ActionMenu.Overlay>
-        </ActionMenu>
+        <Button
+          as="a"
+          href={topbarLinks.social.url}
+          aria-label={topbarLinks.social.ariaLabel}
+          leadingVisual={LinkIcon }
+          target="_blank"
+          rel="noreferrer"
+        >
+        </Button>
       </ButtonGroup>
     </Box>
   );
