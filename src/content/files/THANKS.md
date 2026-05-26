@@ -9,16 +9,16 @@ If you are reading this and wondering whether it is meant for you, **it is.**
 
 ## Thank you
 
-- For the first chance, when nothing on my CV had earned it yet.
+- For the first chance, by just seeing something in a CV that the work hadn't shown yet.
 - For the patience, when I was still figuring it out.
-- For the trust, when you handed over a client, a team, a deadline.
+- For the trust, when you handed over a projects, a team, a deadline.
 - For the honesty, when the right thing to hear was the hard thing to hear.
-- For the laughs in stand-ups, the chai breaks, the late-night incident calls
+- For the laughs in stand-ups, the tea breaks, the late-night incident calls
   that somehow ended up funnier than they had any right to be.
 - For showing up at the airport. For showing up at the hospital. For showing up.
 - For making `feat(homecoming)` feel less like an exit and more like a hug.
 - For whomever being humble and kind to me and treat me as one of them.
-- For the space that you gave me to grow.
+- For the space that you gave me to learn and grow.
 
 
 ## A note for the next person who reads this
