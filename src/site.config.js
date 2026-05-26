@@ -221,7 +221,7 @@ export const timelineEvents = [
     id: 'comment',
     icon: CommentIcon,
     iconLabel: 'Commented',
-    body: [{ bold: 'Copilot' }, ' commented on these changes with comments'],
+    body: [{ bold: 'Copilot' }, ' commented on these changes'],
   },
   {
     id: 'approved',
