@@ -9,11 +9,11 @@ If you are reading this and wondering whether it is meant for you, **it is.**
 
 ## Thank you 🙏
 
-- 🌱 For the first chance, when nothing on my CV had earned it yet.
+- 🌱 For the first chance, beliving in CV before the work hadn't shown yet.
 - ⏳ For the patience, when I was still figuring it out.
 - 🤝 For the trust, when you handed over a project, a team, a deadline.
 - 🪞 For the honesty, when the right thing to hear was the hard thing to hear.
-- ☕ For the laughs in stand-ups, the chai breaks, the late-night incident calls
+- ☕ For the laughs in stand-ups, the tea breaks, the late-night incident calls
   that somehow ended up funnier than they had any right to be.
 - ✈️ For showing up at the airport. 🏥 For showing up at the hospital. 💛 For showing up.
 - 🫂 For making `feat(homecoming)` feel less like an exit and more like a hug.
@@ -29,7 +29,7 @@ If you are reading this and wondering whether it is meant for you, **it is.**
 - 💬 For never making me feel small for asking a question.
 - 🧱 For pushing back on my bad ideas before they shipped.
 - ✨ For believing in the version of me that hadn't shown up yet.
-- ❤️ For everyone who asked, "how are you, and how was your day?"
+- ❤️ For everyone who never get tired of asking , **how are you, and how was your day?**.
 - 📝 For reviewing the draft, the deck, the resignation email.
 
 
@@ -41,7 +41,7 @@ If you are reading this and wondering whether it is meant for you, **it is.**
 - 🧹 To the housekeeping team who kept the place clean and the ambiance just right.
 - 🍱 To the canteen staff who knew what I was going to order before I said it.
 - 🚕 To the cab drivers who smiled at me every time I got in.
-- 📋 To the admin and HR folks I never met — or could never quite reach. :P
+- 📋 To the admin and HR folks I never met — or could never quite reach. 😜
 - 💻 To the IT helpdesk, who at least handed out laptops in decent condition.
 
 You were part of every win. None of it worked without you. 💛
