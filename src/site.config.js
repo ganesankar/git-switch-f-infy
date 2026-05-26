@@ -17,6 +17,7 @@ import {
   EyeIcon,
   CheckIcon,
   GitPullRequestClosedIcon,
+  CommentIcon,
 } from '@primer/octicons-react';
 import {
   IoEarth,
@@ -217,11 +218,17 @@ export const timelineEvents = [
     ],
   },
   {
+    id: 'comment',
+    icon: CommentIcon,
+    iconLabel: 'Commented',
+    body: [{ bold: 'Copilot' }, ' commented on these changes with comments'],
+  },
+  {
     id: 'approved',
     icon: CheckIcon,
     iconLabel: 'Approved',
     badgeSx: { bg: 'success.emphasis', color: 'fg.onEmphasis' },
-    body: [{ bold: 'Copilot' }, ' approved these changes with comments'],
+    body: [{ bold: 'Security Scan Bot' }, ' approved these changes with comments'],
   },
   {
     id: 'unmerged',
