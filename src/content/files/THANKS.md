@@ -19,9 +19,7 @@ If you are reading this and wondering whether it is meant for you, **it is.**
 - 🫂 For making `feat(homecoming)` feel less like an exit and more like a hug.
 - 🌼 For everyone who was humble and kind, and treated me as one of their own.
 - 🌳 For the space you gave me to grow.
-- 📚 For teaching me — through debates, in 1:1s, in PR reviews, in offhand corridor advice.
 - 🚪 For the introduction that became a friendship, a referral, an open door.
-- 🤜🤛 For everyone who took me in as a brother, a buddy — and made room for me in their personal lives, their celebrations, and their slightly chaotic adventures.
 - 🤍 For understanding me on the days I had to take off without explanations.
 - 👂 For listening when the 1:1 went off-topic and I really needed it to.
 - 🛑 For the "no" that I didn't understand then — and thank you for now.
@@ -29,6 +27,10 @@ If you are reading this and wondering whether it is meant for you, **it is.**
 - 💬 For never making me feel small for asking a question.
 - 🧱 For pushing back on my bad ideas before they shipped.
 - ✨ For believing in the version of me that hadn't shown up yet.
+- 📚 For teaching me — through debates, in 1:1s, in PR reviews, in offhand corridor advice.
+- 🤜 For everyone who took me in as a brother, a buddy  
+      🤛 and made roomm for me in their personal lives, 
+      🤛 their celebrations, and their slightly chaotic adventures.
 - ❤️ For everyone who never get tired of asking , **how are you, and how was your day?**.
 - 📝 For reviewing the draft, the deck, the resignation email.
 
